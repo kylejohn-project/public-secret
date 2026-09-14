@@ -3,18 +3,23 @@ import { Link } from "react-router-dom";
 const communityPerformances = [
   {
     name: "ExtraRDnary",
+    coach: "RD Pagsanghan"
   },
   {
     name: "Barrio Swagg",
+    coach: "Kliff Acosta"
   },
   {
     name: "The Femme Series",
+    coach: "Richard Navarro"
   },
   {
     name: "Reality",
+    coach: "Jade Pangilinan"
   },
   {
     name: "Rad*Lab",
+    coach: "Melchor Bureros III"
   },
 ];
 
@@ -56,7 +61,7 @@ export default function Home() {
           <div className="max-w-5xl">
 
             <p className="mb-6 text-xs font-bold uppercase tracking-[0.35em] text-orange-600">
-              Public Secret 001
+              Rock*Well PH Presents:
             </p>
 
             <h1 className="text-7xl font-black uppercase leading-[0.8] tracking-[-0.06em] sm:text-8xl md:text-[10rem]">
@@ -68,11 +73,14 @@ export default function Home() {
             <div className="mt-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
 
               <div>
-                <p className="text-sm font-bold uppercase tracking-[0.2em] text-white">
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-orange-600">
+                  001
+                </p>
+                <p className="mt-2 text-sm font-bold uppercase tracking-[0.2em] text-white">
                   Hydro Superclub
                 </p>
 
-                <p className="mt-2 text-sm uppercase tracking-[0.2em] text-white/40">
+                <p className="mt-1 text-sm uppercase tracking-[0.2em] text-white/40">
                   October 15, 2026
                 </p>
               </div>
@@ -321,7 +329,6 @@ export default function Home() {
 
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/40">
               Performances from Rock*Well PH.
-              More details to be revealed.
             </p>
           </div>
 
@@ -347,10 +354,6 @@ export default function Home() {
         Community Performances
       </h3>
     </div>
-
-    <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-orange-700">
-      05 Groups
-    </span>
   </div>
 
   {/* GROUP PLACEHOLDERS */}
@@ -386,13 +389,13 @@ export default function Home() {
           {/* GROUP INFO */}
           <div className="flex items-center justify-between p-5">
             <div>
-              <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">
-                Community Group
-              </p>
-
-              <h4 className="mt-1 text-xl font-black uppercase">
+    
+              <h4 className="text-xl font-black uppercase">
                 {group.name}
               </h4>
+              <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-white/30">
+                by Coach {group.coach}
+              </p>
             </div>
 
             <span className="text-lg text-white/20 transition group-hover:text-orange-600">
@@ -410,10 +413,6 @@ export default function Home() {
       <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/20">
         Featuring Rock*Well PH &amp; Friends
       </p>
-
-      <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-orange-700">
-        01 Featured + 05 Community
-      </span>
     </div>
 
   </div>
