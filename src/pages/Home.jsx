@@ -73,7 +73,7 @@ export default function Home() {
                 </p>
 
                 <p className="mt-2 text-sm uppercase tracking-[0.2em] text-white/40">
-                  2026 · Manila
+                  October 15, 2026
                 </p>
               </div>
 
