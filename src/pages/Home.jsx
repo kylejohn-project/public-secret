@@ -22,51 +22,72 @@ export default function Home() {
   return (
     <main>
       {/* HERO */}
-      <section className="relative flex min-h-screen items-end overflow-hidden bg-black">
+      <section className="relative min-h-screen overflow-hidden bg-[#050505]">
+
+        {/* BACKGROUND IMAGE PLACEHOLDER */}
         <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(194,65,12,0.18),transparent_35%)]" />
+          <div className="h-full w-full bg-neutral-900">
+            <div className="flex h-full items-center justify-center">
+              <div className="text-center">
+                <span className="block text-[10rem] font-black tracking-[-0.08em] text-white/[0.03] md:text-[18rem]">
+                  001
+                </span>
 
-            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/10">
+                  Hero Image Placeholder
+                </span>
+              </div>
+            </div>
+          </div>
 
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.95),rgba(0,0,0,0.35),rgba(0,0,0,0.8))]" />
+          {/* DARK OVERLAY */}
+          <div className="absolute inset-0 bg-black/70" />
+
+          {/* ORANGE AMBIENT GLOW */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(194,65,12,0.16),transparent_45%)]" />
+
+          {/* BOTTOM GRADIENT */}
+          <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#050505] to-transparent" />
         </div>
 
-        {/* Hero content */}
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 pt-32 md:px-10 md:pb-20">
+        {/* HERO CONTENT */}
+        <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-end px-6 pb-16 pt-32 md:px-10 md:pb-20">
+
           <div className="max-w-5xl">
-            <p className="mb-6 text-xs font-bold uppercase tracking-[0.4em] text-orange-600">
-              Rock*Well PH presents:
+
+            <p className="mb-6 text-xs font-bold uppercase tracking-[0.35em] text-orange-600">
+              Public Secret 001
             </p>
 
-            <h1 className="text-[18vw] font-black uppercase leading-[0.78] tracking-[-0.07em] md:text-[11rem]">
+            <h1 className="text-7xl font-black uppercase leading-[0.8] tracking-[-0.06em] sm:text-8xl md:text-[10rem]">
               Public
               <br />
               Secret
             </h1>
 
             <div className="mt-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-orange-600">
-                    001
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-white">
+                  Hydro Superclub
                 </p>
 
-                <p className="mt-2 text-xl font-bold">
-                  October 15, 2026
-                  <br />
-                  Hydro Superclub
+                <p className="mt-2 text-sm uppercase tracking-[0.2em] text-white/40">
+                  2026 · Manila
                 </p>
               </div>
 
               <Link
                 to="/tickets"
-                className="btn btn-lg h-16 rounded-none border-0 bg-white px-10 text-black hover:bg-neutral-200"
+                className="btn h-14 rounded-none border-0 bg-orange-700 px-8 text-xs font-bold uppercase tracking-[0.2em] text-white hover:bg-orange-600"
               >
-                BUY TICKETS
-                <span className="text-xl">↗</span>
+                Buy Tickets ↗
               </Link>
+
             </div>
           </div>
         </div>
+
       </section>
 
       {/* EVENT INTRO */}
