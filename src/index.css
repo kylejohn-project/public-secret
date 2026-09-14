@@ -34,3 +34,15 @@ input {
   background: #c2410c;
   color: #ffffff;
 }
+
+/* Horizontal mobile scrollers */
+@media (max-width: 767px) {
+  .overflow-x-auto {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .overflow-x-auto::-webkit-scrollbar {
+    display: none;
+  }
+}

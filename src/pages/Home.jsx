@@ -148,7 +148,7 @@ export default function Home() {
             </div>
 
             {/* DJ PLACEHOLDERS */}
-            <div className="mt-16 grid gap-3 sm:grid-cols-2 md:grid-cols-4">
+            <div className="mt-16 flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:overflow-visible md:pb-0">
 
             {Array.from({ length: 7 }).map((_, index) => {
                 const number = String(index + 1).padStart(2, "0");
@@ -156,9 +156,9 @@ export default function Home() {
                 return (
                 <div
                     key={index}
-                    className={`group relative overflow-hidden border border-white/10 bg-white/[0.02] transition duration-300 hover:border-orange-700/60 hover:bg-orange-950/10 ${
+                    className={`group relative min-w-[78vw] snap-start overflow-hidden border border-white/10 bg-white/[0.02] transition duration-300 hover:border-orange-700/60 hover:bg-orange-950/10 sm:min-w-[45vw] md:min-w-0 ${
                     index === 0
-                        ? "sm:col-span-2 md:col-span-2 md:row-span-2"
+                        ? "md:col-span-2 md:row-span-2"
                         : ""
                     }`}
                 >
@@ -258,8 +258,8 @@ export default function Home() {
     </div>
 
     {/* FEATURED ROCK*WELL PERFORMANCE */}
-    <div className="mt-16">
-      <div className="group relative overflow-hidden border border-orange-700/40 bg-white/[0.02] transition duration-500 hover:border-orange-500">
+    <div className="mt-16 overflow-x-auto pb-4 md:overflow-visible md:pb-0">
+      <div className="group relative min-w-[88vw] overflow-hidden border border-orange-700/40 bg-white/[0.02] transition duration-500 hover:border-orange-500 md:min-w-0">
 
         {/* IMAGE PLACEHOLDER */}
         <div className="relative flex aspect-[16/8] items-center justify-center bg-neutral-900">
@@ -331,14 +331,14 @@ export default function Home() {
   </div>
 
   {/* GROUP PLACEHOLDERS */}
-  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+  <div className="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory lg:grid lg:grid-cols-3 lg:overflow-visible lg:pb-0">
     {communityPerformances.map((group, index) => {
       const number = String(index + 2).padStart(2, "0");
 
       return (
         <div
-          key={group.name}
-          className="group relative overflow-hidden border border-white/10 bg-white/[0.02] transition duration-300 hover:border-orange-700/60 hover:bg-orange-950/10"
+            key={group.name}
+            className="group relative min-w-[78vw] snap-start overflow-hidden border border-white/10 bg-white/[0.02] transition duration-300 hover:border-orange-700/60 hover:bg-orange-950/10 sm:min-w-[45vw] lg:min-w-0"
         >
           {/* IMAGE PLACEHOLDER */}
           <div className="relative flex aspect-[4/5] items-center justify-center bg-neutral-900">
