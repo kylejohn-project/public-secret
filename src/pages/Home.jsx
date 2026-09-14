@@ -35,7 +35,7 @@ export default function Home() {
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 pt-32 md:px-10 md:pb-20">
           <div className="max-w-5xl">
             <p className="mb-6 text-xs font-bold uppercase tracking-[0.4em] text-orange-600">
-              Hydro Superclub
+              Rock*Well PH presents:
             </p>
 
             <h1 className="text-[18vw] font-black uppercase leading-[0.78] tracking-[-0.07em] md:text-[11rem]">
@@ -52,6 +52,8 @@ export default function Home() {
 
                 <p className="mt-2 text-xl font-bold">
                   October 15, 2026
+                  <br />
+                  Hydro Superclub
                 </p>
               </div>
 
