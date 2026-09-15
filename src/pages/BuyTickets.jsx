@@ -171,7 +171,7 @@ export default function BuyTickets() {
                       </p>
 
                       <p className="mt-2 text-sm text-white/40">
-                        Entry to Public Secret 001
+                        Inclusive of 1 cocktail drink per ticket
                       </p>
                     </div>
 

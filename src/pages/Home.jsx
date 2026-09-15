@@ -147,7 +147,7 @@ export default function Home() {
 
           <div className="p-8 md:p-10">
             <p className="text-xs uppercase tracking-[0.3em] text-white/40">
-              Tickets
+              Tickets (Inclusive of 1 cocktail drink)
             </p>
 
             <p className="mt-5 text-2xl font-bold">
