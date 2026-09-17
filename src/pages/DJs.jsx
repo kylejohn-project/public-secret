@@ -130,11 +130,6 @@ function DJCard({ dj }) {
           </span>
 
         </div>
-
-        <p className="mt-5 text-sm leading-relaxed text-white/40">
-          {dj.details}
-        </p>
-
       </div>
 
     </article>

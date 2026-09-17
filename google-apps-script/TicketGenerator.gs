@@ -604,7 +604,7 @@ body.appendParagraph("");
 
 const cocktailBox =
   body.appendTable([
-    ["✦  INCLUDES 1 FREE COCKTAIL"]
+    ["✦  INCLUDES 1 FREE DRINK"]
   ]);
 
 cocktailBox.setBorderWidth(1);
@@ -1005,7 +1005,7 @@ Your PDF contains all tickets included in your order.
 
 Please present your ticket upon entry.
 
-Each ticket includes 1 free cocktail.
+Each ticket includes 1 free drink.
 
 Order ID:
 ${orderId}
@@ -1159,7 +1159,7 @@ Rock*Well PH`;
           font-size:14px;
           font-weight:bold;
         ">
-          Each ticket includes 1 free cocktail.
+          Each ticket includes 1 free drink.
         </p>
 
 

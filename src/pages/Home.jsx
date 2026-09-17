@@ -66,9 +66,157 @@ const djs = [
 export default function Home() {
   return (
     <main>
+
+      {/* TICKET MARQUEE */}
+      <Link
+        to="/tickets"
+        className="
+          group
+          relative
+          z-20
+          block
+          w-full
+          top-16
+          overflow-hidden
+          bg-[#050505]
+          py-5
+          md:py-3
+        "
+      >
+        <div className="marquee-track flex w-max items-center whitespace-nowrap">
+
+                  {/* FIRST SET */}
+                  <div className="flex shrink-0 items-center">
+                    {Array.from({ length: 3 }).map((_, index) => (
+                      <div
+                        key={`marquee-a-${index}`}
+                        className="
+                          flex
+                          shrink-0
+                          items-center
+                          text-xs
+                          font-black
+                          uppercase
+                          tracking-[-0.02em]
+                          text-ps-red
+                          md:text-md
+                          lg:text-xl
+                        "
+                      >
+                        <span>
+                          ROCK*WELL PH × HYDRO SUPERCLUB
+                        </span>
+
+                        <span className="mx-7 md:mx-10">
+                          ✦
+                        </span>
+
+                        <span>
+                          PUBLIC SECRET 001
+                        </span>
+
+                        <span className="mx-7 md:mx-10">
+                          ✦
+                        </span>
+
+                        <span>
+                          TICKETS ₱555
+                        </span>
+
+                        <span className="mx-7 md:mx-10">
+                          ✦
+                        </span>
+
+                        <span>
+                          WALK-IN ₱999
+                        </span>
+
+                        <span className="mx-7 md:mx-10">
+                          ✦
+                        </span>
+
+                        <span>
+                          GET YOUR TICKETS NOW ↗
+                        </span>
+
+                        <span className="mx-7 md:mx-10">
+                          ✦
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+
+                  {/* DUPLICATE FOR SEAMLESS LOOP */}
+                  <div
+                    className="flex shrink-0 items-center"
+                    aria-hidden="true"
+                  >
+                    {Array.from({ length: 3 }).map((_, index) => (
+                      <div
+                        key={`marquee-b-${index}`}
+                        className="
+                          flex
+                          shrink-0
+                          items-center
+                          text-xs
+                          font-black
+                          uppercase
+                          tracking-[-0.02em]
+                          text-ps-red
+                          md:text-md
+                          lg:text-xl
+                        "
+                      >
+                        <span>
+                          ROCK*WELL PH × HYDRO SUPERCLUB
+                        </span>
+
+                        <span className="mx-7 md:mx-10">
+                          ✦
+                        </span>
+
+                        <span>
+                          PUBLIC SECRET 001
+                        </span>
+
+                        <span className="mx-7 md:mx-10">
+                          ✦
+                        </span>
+
+                        <span>
+                          TICKETS ₱555
+                        </span>
+
+                        <span className="mx-7 md:mx-10">
+                          ✦
+                        </span>
+
+                        <span>
+                          WALK-IN ₱999
+                        </span>
+
+                        <span className="mx-7 md:mx-10">
+                          ✦
+                        </span>
+
+                        <span>
+                          GET YOUR TICKETS NOW ↗
+                        </span>
+
+                        <span className="mx-7 md:mx-10">
+                          ✦
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                </div>
+              </Link>
+
       {/* HERO */}
       <section className="relative min-h-screen overflow-hidden bg-[#050505]">
-
+        
         {/* HERO BACKGROUND */}
         <div className="absolute inset-0">
 
@@ -191,7 +339,7 @@ export default function Home() {
 
           <div className="p-8 md:p-10">
             <p className="text-xs uppercase tracking-[0.3em] text-white/40">
-              Tickets (Inclusive of 1 cocktail drink)
+              Tickets (Inclusive of 1 free drink) <br /> Walk-in Price: ₱999
             </p>
 
             <p className="mt-5 text-2xl font-bold">

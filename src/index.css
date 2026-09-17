@@ -71,3 +71,34 @@ input {
     display: none;
   }
 }
+
+/* ==========================================
+   PUBLIC SECRET MARQUEE
+   ========================================== */
+
+.marquee-track {
+  animation: ps-marquee 40s linear infinite;
+  will-change: transform;
+}
+
+@keyframes ps-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause when user hovers */
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}

@@ -20,7 +20,7 @@ export default function TicketSelector({
           </p>
 
           <p className="mt-2 text-sm text-white/40">
-            Inclusive of 1 cocktail drink per ticket
+            Inclusive of 1 free drink per ticket
           </p>
 
             <div className="mt-4">

@@ -16,7 +16,7 @@ export default function PaymentSection({
 
           <div className="max-w-[280px] bg-white p-5">
             <img
-              src="/Unknown-3.jpg"
+              src="/qr-payment.jpg"
               alt="Payment QR Code"
               className="aspect-square w-full object-contain"
             />
