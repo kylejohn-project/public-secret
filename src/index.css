@@ -10,8 +10,33 @@
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* =========================
+     PUBLIC SECRET BRAND
+     ========================= */
+
+  --ps-background: #050505;
+
+  --ps-accent: #ff1f1f;
+  --ps-accent-hover: #ef4444;
+
+  --ps-accent-soft: rgba(220, 38, 38, 0.1);
+  --ps-accent-medium: rgba(220, 38, 38, 0.2);
+  --ps-accent-border: rgba(220, 38, 38, 0.4);
+}
+
+@theme {
+  --color-ps-red: var(--ps-accent);
+  --color-ps-red-hover: var(--ps-accent-hover);
+
+  --color-ps-red-soft: var(--ps-accent-soft);
+  --color-ps-red-medium: var(--ps-accent-medium);
+  --color-ps-red-border: var(--ps-accent-border);
+
+  --color-ps-page: var(--ps-background);
 }
 
 html {

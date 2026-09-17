@@ -1,89 +1,142 @@
 const djs = [
   {
     id: 1,
-    name: "DJ1",
+    name: "DJ Loonyo",
+    image: "/djs/loonyo.webp",
     details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     id: 2,
-    name: "DJ2",
+    name: "DJ Amari",
+    image: "/djs/amari.webp",
     details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     id: 3,
-    name: "DJ3",
+    name: "DJ Kliff",
+    image: "/djs/kliff.webp",
     details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     id: 4,
-    name: "DJ4",
+    name: "DJ Mannex",
+    image: "/djs/mannex.webp",
     details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident, sunt in culpa.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     id: 5,
-    name: "DJ5",
+    name: "DJ Aya",
+    image: "/djs/aya.webp",
     details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     id: 6,
-    name: "DJ6",
+    name: "DJ M3",
+    image: "/djs/m3.webp",
     details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     id: 7,
-    name: "DJ7",
+    name: "DJ MRL",
+    image: "/djs/mrl.webp",
     details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia bibendum nulla sed consectetur.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  },
+  {
+    id: 8,
+    name: "DJ Wana",
+    image: "/djs/wana.webp",
+    details:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
 ];
 
 function DJCard({ dj }) {
+  const number = String(dj.id).padStart(2, "0");
+
   return (
-    <article className="group border border-white/10 bg-white/[0.02] transition duration-300 hover:border-orange-700/60 hover:bg-orange-950/10">
+    <article
+      className="
+        group
+        flex
+        h-full
+        flex-col
+        overflow-hidden
+        border
+        border-white/10
+        bg-white/[0.02]
+        transition
+        duration-300
+        hover:border-ps-red
+        hover:bg-ps-red-soft
+      "
+    >
 
       {/* IMAGE */}
-      <div className="aspect-[4/5] overflow-hidden bg-neutral-900">
-        <div className="flex h-full w-full items-center justify-center bg-neutral-800">
-          <div className="text-center">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-white/10 text-xl font-black text-white/20">
-              {dj.id}
-            </div>
+      <div className="relative aspect-[2/3] w-full shrink-0 overflow-hidden bg-neutral-900">
 
-            <span className="text-xs uppercase tracking-[0.3em] text-white/20">
-              DJ Image
-            </span>
-          </div>
-        </div>
+        <img
+          src={dj.image}
+          alt={dj.name}
+          loading="lazy"
+          className="
+            h-full
+            w-full
+            object-cover
+            transition
+            duration-500
+            group-hover:scale-[1.02]
+          "
+        />
+
+        <div
+          className="
+            pointer-events-none
+            absolute
+            inset-0
+            bg-gradient-to-t
+            from-black/40
+            via-transparent
+            to-transparent
+          "
+        />
+
+        <span className="absolute left-4 top-4 text-[10px] font-bold tracking-[0.25em] text-white/60">
+          {number}
+        </span>
+
       </div>
 
-      {/* CONTENT */}
-      <div className="p-6">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-orange-700">
-              DJ 0{dj.id}
-            </p>
 
+      {/* CONTENT */}
+      <div className="flex flex-1 flex-col p-6">
+
+        <div className="flex items-start justify-between gap-4">
+
+          <div>
             <h2 className="mt-2 text-3xl font-black uppercase tracking-tight">
               {dj.name}
             </h2>
           </div>
 
           <span className="text-xs text-white/20">
-            00{dj.id}
+            0{number}
           </span>
+
         </div>
 
         <p className="mt-5 text-sm leading-relaxed text-white/40">
           {dj.details}
         </p>
+
       </div>
+
     </article>
   );
 }
@@ -114,7 +167,7 @@ export default function DJs() {
 
         {/* DJ GRID */}
         <section>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {djs.map((dj) => (
               <DJCard key={dj.id} dj={dj} />
             ))}

@@ -6,7 +6,7 @@ export default function Footer() {
         <div>
           <p className="text-sm font-black tracking-[0.25em] text-white">
             PUBLIC SECRET
-            <span className="ml-2 text-orange-600">001</span>
+            <span className="ml-2 text-ps-red">001</span>
           </p>
 
           <p className="mt-3 text-sm text-white/40">

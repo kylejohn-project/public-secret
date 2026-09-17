@@ -27,7 +27,7 @@ export default function Navbar() {
         <Link
           to="/"
           onClick={closeMenu}
-          className="relative z-10 text-sm font-black tracking-[0.2em] text-white transition hover:text-orange-500"
+          className="relative z-10 text-sm font-black tracking-[0.2em] text-white transition hover:text-ps-red"
         >
           PUBLIC SECRET
         </Link>
@@ -41,8 +41,8 @@ export default function Navbar() {
               className={({ isActive }) =>
                 `text-xs font-bold uppercase tracking-[0.2em] transition ${
                   isActive
-                    ? "text-orange-500"
-                    : "text-white/40 hover:text-orange-500"
+                    ? "text-ps-red"
+                    : "text-white/40 hover:text-ps-red"
                 }`
               }
             >
@@ -52,7 +52,7 @@ export default function Navbar() {
 
           <Link
             to="/tickets"
-            className="btn btn-sm rounded-none border-0 bg-orange-700 px-5 font-bold text-white hover:bg-orange-600"
+            className="btn btn-sm rounded-none border-0 bg-ps-red px-5 font-bold text-white hover:bg-ps-red-hover"
           >
             BUY TICKETS
           </Link>
@@ -108,8 +108,8 @@ export default function Navbar() {
               className={({ isActive }) =>
                 `border-b border-white/10 py-5 text-sm font-bold uppercase tracking-[0.25em] transition ${
                   isActive
-                    ? "text-orange-500"
-                    : "text-white/40 hover:text-orange-500"
+                    ? "text-ps-red"
+                    : "text-white/40 hover:text-ps-red"
                 }`
               }
             >
@@ -120,7 +120,7 @@ export default function Navbar() {
           <Link
             to="/tickets"
             onClick={closeMenu}
-            className="btn mt-6 h-14 rounded-none border-0 bg-orange-700 text-white hover:bg-orange-600"
+            className="btn mt-6 h-14 rounded-none border-0 bg-ps-red text-white hover:bg-ps-red-hover"
           >
             BUY TICKETS ↗
           </Link>

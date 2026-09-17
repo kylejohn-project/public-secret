@@ -3,23 +3,63 @@ import { Link } from "react-router-dom";
 const communityPerformances = [
   {
     name: "ExtraRDnary",
-    coach: "RD Pagsanghan"
+    coach: "RD Pagsanghan",
+    image: "/communitylogo/extrardnary.webp",
   },
   {
     name: "Barrio Swagg",
-    coach: "Kliff Acosta"
+    coach: "Kliff Acosta",
+    image: "/communitylogo/barrioswagg.webp",
   },
   {
     name: "The Femme Series",
-    coach: "Richard Navarro"
+    coach: "Richard Navarro",
+    image: "/communitylogo/tfs.webp",
   },
   {
     name: "Reality",
-    coach: "Jade Pangilinan"
+    coach: "Jade Pangilinan",
+    image: "/communitylogo/reality.webp",
   },
   {
     name: "Rad*Lab",
-    coach: "Melchor Bureros III"
+    coach: "Melchor Bureros III",
+    image: "/communitylogo/radlab.webp",
+  }
+];
+
+const djs = [
+  {
+    name: "DJ Loonyo",
+    image: "/djs/loonyo.webp",
+  },
+  {
+    name: "DJ Amari",
+    image: "/djs/amari.webp",
+  },
+  {
+    name: "DJ Kliff",
+    image: "/djs/kliff.webp",
+  },
+  {
+    name: "DJ Mannex",
+    image: "/djs/mannex.webp",
+  },
+  {
+    name: "DJ Aya",
+    image: "/djs/aya.webp",
+  },
+  {
+    name: "DJ M3",
+    image: "/djs/m3.webp",
+  },
+  {
+    name: "DJ MRL",
+    image: "/djs/mrl.webp",
+  },
+  {
+    name: "DJ Wana",
+    image: "/djs/wana.webp",
   },
 ];
 
@@ -29,30 +69,33 @@ export default function Home() {
       {/* HERO */}
       <section className="relative min-h-screen overflow-hidden bg-[#050505]">
 
-        {/* BACKGROUND IMAGE PLACEHOLDER */}
+        {/* HERO BACKGROUND */}
         <div className="absolute inset-0">
-          <div className="h-full w-full bg-neutral-900">
-            <div className="flex h-full items-center justify-center">
-              <div className="text-center">
-                <span className="block text-[10rem] font-black tracking-[-0.08em] text-white/[0.03] md:text-[18rem]">
-                  001
-                </span>
 
-                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/10">
-                  Hero Image Placeholder
-                </span>
-              </div>
-            </div>
-          </div>
+          <img
+            src="/hero.webp"
+            alt=""
+            className="
+              h-full
+              w-full
+              object-cover
+              object-[85%_center]
+              md:object-[center_25%]
+            "
+          />
 
           {/* DARK OVERLAY */}
-          <div className="absolute inset-0 bg-black/70" />
+          <div className="absolute inset-0 bg-black/20" />
+
+          {/* LEFT-SIDE TEXT GRADIENT */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/25 to-transparent" />
 
           {/* ORANGE AMBIENT GLOW */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(194,65,12,0.16),transparent_45%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,var(--ps-accent-soft),transparent_45%)]" />
 
           {/* BOTTOM GRADIENT */}
-          <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#050505] to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#050505] via-[#050505]/30 to-transparent" />
+
         </div>
 
         {/* HERO CONTENT */}
@@ -60,7 +103,7 @@ export default function Home() {
 
           <div className="max-w-5xl">
 
-            <p className="mb-6 text-xs font-bold uppercase tracking-[0.35em] text-orange-600">
+            <p className="mb-6 text-xs font-bold uppercase tracking-[0.35em] text-ps-red">
               Rock*Well PH Presents:
             </p>
 
@@ -73,9 +116,10 @@ export default function Home() {
             <div className="mt-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
 
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-orange-600">
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-ps-red">
                   001
                 </p>
+
                 <p className="mt-2 text-sm font-bold uppercase tracking-[0.2em] text-white">
                   Hydro Superclub
                 </p>
@@ -87,7 +131,7 @@ export default function Home() {
 
               <Link
                 to="/tickets"
-                className="btn h-14 rounded-none border-0 bg-orange-700 px-8 text-xs font-bold uppercase tracking-[0.2em] text-white hover:bg-orange-600"
+                className="btn h-14 rounded-none border-0 bg-ps-red px-8 text-xs font-bold uppercase tracking-[0.2em] text-white hover:bg-ps-red-hover"
               >
                 Buy Tickets ↗
               </Link>
@@ -115,7 +159,7 @@ export default function Home() {
 
           <div className="flex items-end">
             <p className="max-w-xl text-lg leading-relaxed text-white/60 md:text-xl">
-              Public Secret 001 brings together music, dance, performances,
+              Public Secret 001 brings together music, dance performances,
               and people in one unforgettable night at Hydro Superclub.
             </p>
           </div>
@@ -131,7 +175,7 @@ export default function Home() {
             </p>
 
             <p className="mt-5 text-2xl font-bold">
-              October 15, 2026
+              October 15, 2026 <br/> 9:00 PM
             </p>
           </div>
 
@@ -165,7 +209,7 @@ export default function Home() {
             {/* SECTION HEADER */}
             <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
             <div>
-                <p className="text-xs font-bold uppercase tracking-[0.35em] text-orange-600">
+                <p className="text-xs font-bold uppercase tracking-[0.35em] text-ps-red">
                 Public Secret 001
                 </p>
 
@@ -178,77 +222,109 @@ export default function Home() {
 
             </div>
 
-            {/* DJ PLACEHOLDERS */}
+            {/* DJ LINEUP */}
             <div className="mt-16 flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:overflow-visible md:pb-0">
 
-            {Array.from({ length: 7 }).map((_, index) => {
+              {djs.map((dj, index) => {
                 const number = String(index + 1).padStart(2, "0");
 
                 return (
-                <div
-                    key={index}
-                    className={`group relative min-w-[78vw] snap-start overflow-hidden border border-white/10 bg-white/[0.02] transition duration-300 hover:border-orange-700/60 hover:bg-orange-950/10 sm:min-w-[45vw] md:min-w-0 ${
-                    index === 0
-                        ? "md:col-span-2 md:row-span-2"
-                        : ""
-                    }`}
-                >
+                  <div
+                    key={dj.name}
+                    className="
+                      group
+                      relative
+                      flex
+                      min-w-[78vw]
+                      snap-start
+                      flex-col
+                      overflow-hidden
+                      border
+                      border-white/10
+                      bg-white/[0.02]
+                      transition
+                      duration-300
+                      hover:border-ps-red
+                      hover:bg-ps-red-soft
+                      sm:min-w-[45vw]
+                      md:min-w-0
+                    "
+                  >
 
-                    {/* IMAGE PLACEHOLDER */}
-                    <div
-                    className={`relative flex items-center justify-center bg-neutral-900 ${
-                        index === 0
-                        ? "aspect-square"
-                        : "aspect-[4/5]"
-                    }`}
-                    >
+                    {/* DJ IMAGE */}
+                    <div className="relative aspect-[2/3] w-full overflow-hidden bg-neutral-900">
 
-                    {/* Orange glow */}
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(194,65,12,0.12),transparent_55%)] opacity-0 transition duration-500 group-hover:opacity-100" />
+                      <img
+                        src={dj.image}
+                        alt={dj.name}
+                        loading="lazy"
+                        className="
+                          h-full
+                          w-full
+                          object-cover
+                          transition
+                          duration-500
+                          group-hover:scale-[1.02]
+                        "
+                      />
 
-                    <div className="relative text-center">
-                        <span className="block text-5xl font-black text-white/[0.05] md:text-7xl">
+                      {/* SUBTLE BOTTOM GRADIENT */}
+                      <div
+                        className="
+                          pointer-events-none
+                          absolute
+                          inset-0
+                          bg-gradient-to-t
+                          from-black/40
+                          via-transparent
+                          to-transparent
+                        "
+                      />
+
+                      {/* NUMBER */}
+                      <span
+                        className="
+                          absolute
+                          left-4
+                          top-4
+                          text-[10px]
+                          font-bold
+                          tracking-[0.25em]
+                          text-white/60
+                        "
+                      >
                         {number}
-                        </span>
+                      </span>
 
-                        <span className="mt-2 block text-[10px] font-bold uppercase tracking-[0.3em] text-white/20">
-                        Artist
-                        </span>
                     </div>
 
-                    {/* Number */}
-                    <span className="absolute left-4 top-4 text-[10px] font-bold tracking-[0.25em] text-orange-700">
-                        {number}
-                    </span>
-                    </div>
+                    {/* DJ INFO */}
+                    <div className="flex min-h-[92px] flex-1 items-center justify-between p-5">
 
-                    {/* NAME */}
-                    <div className="flex items-center justify-between p-5">
-                    <div>
-                        <p className="text-xs uppercase tracking-[0.2em] text-white/30">
-                        Artist
-                        </p>
+                      <div>
 
                         <h3 className="mt-1 text-xl font-black uppercase">
-                        DJ {index + 1}
+                          {dj.name}
                         </h3>
-                    </div>
+                      </div>
 
-                    <span className="text-lg text-white/20 transition group-hover:text-orange-600">
+                      <span className="text-lg text-white/20 transition group-hover:text-ps-red">
                         ↗
-                    </span>
+                      </span>
+
                     </div>
 
-                </div>
+                  </div>
                 );
-            })}
+              })}
+
             </div>
 
             {/* VIEW ALL */}
             <div className="mt-10 flex justify-end">
             <Link
                 to="/djs"
-                className="group flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-white/50 transition hover:text-orange-500"
+                className="group flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-white/50 transition hover:text-ps-red"
             >
                 View All DJs
 
@@ -268,7 +344,7 @@ export default function Home() {
     {/* SECTION HEADER */}
     <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
       <div>
-        <p className="text-xs font-bold uppercase tracking-[0.35em] text-orange-600">
+        <p className="text-xs font-bold uppercase tracking-[0.35em] text-ps-red">
           Rock*Well PH
         </p>
 
@@ -290,36 +366,82 @@ export default function Home() {
 
     {/* FEATURED ROCK*WELL PERFORMANCE */}
     <div className="mt-16 overflow-x-auto pb-4 md:overflow-visible md:pb-0">
-      <div className="group relative min-w-[88vw] overflow-hidden border border-orange-700/40 bg-white/[0.02] transition duration-500 hover:border-orange-500 md:min-w-0">
+      <div className="group relative min-w-[88vw] overflow-hidden border border-ps-red-border bg-white/[0.02] transition duration-500 hover:border-ps-red md:min-w-0">
 
-        {/* IMAGE PLACEHOLDER */}
-        <div className="relative flex aspect-[16/8] items-center justify-center bg-neutral-900">
+        {/* ROCK*WELL PH PERFORMANCE IMAGE */}
+        <div className="relative aspect-[16/8] overflow-hidden bg-neutral-900">
 
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(194,65,12,0.18),transparent_60%)]" />
+          <img
+            src="/rockwell.webp"
+            alt="Rock*Well PH Performance"
+            loading="lazy"
+            className="
+              h-full
+              w-full
+              object-cover
+              object-center
+              transition
+              duration-700
+              group-hover:scale-[1.02]
+            "
+          />
 
-          <div className="relative text-center">
-            <span className="block text-7xl font-black text-white/[0.06] md:text-[10rem]">
-              01
-            </span>
+          {/* SUBTLE DARK OVERLAY */}
+          <div
+            className="
+              pointer-events-none
+              absolute
+              inset-0
+              bg-gradient-to-t
+              from-black/30
+              via-transparent
+              to-black/10
+            "
+          />
 
-            <span className="mt-2 block text-[10px] font-bold uppercase tracking-[0.4em] text-orange-600">
-              Featured Performance
-            </span>
-          </div>
-
-          <span className="absolute left-5 top-5 text-[10px] font-bold tracking-[0.3em] text-orange-600">
+          {/* PERFORMANCE NUMBER */}
+          <span
+            className="
+              absolute
+              left-5
+              top-5
+              text-[10px]
+              font-bold
+              tracking-[0.3em]
+              text-ps-red
+            "
+          >
             01
           </span>
 
-          <span className="absolute right-5 top-5 border border-orange-600/30 px-3 py-2 text-[9px] font-bold uppercase tracking-[0.25em] text-orange-500">
+          {/* FEATURED BADGE */}
+          <span
+            className="
+              absolute
+              right-5
+              top-5
+              border
+              border-ps-red/40
+              bg-black/40
+              px-3
+              py-2
+              text-[9px]
+              font-bold
+              uppercase
+              tracking-[0.25em]
+              text-ps-red
+              backdrop-blur-sm
+            "
+          >
             Featured
           </span>
+
         </div>
 
         {/* INFO */}
         <div className="flex flex-col justify-between gap-5 p-6 md:flex-row md:items-end md:p-8">
           <div>
-            <p className="text-xs uppercase tracking-[0.25em] text-orange-600">
+            <p className="text-xs uppercase tracking-[0.25em] text-ps-red">
               Main Performance
             </p>
 
@@ -332,7 +454,7 @@ export default function Home() {
             </p>
           </div>
 
-          <span className="text-2xl text-orange-600 transition-transform duration-300 group-hover:translate-x-2">
+          <span className="text-2xl text-ps-red transition-transform duration-300 group-hover:translate-x-2">
             ↗
           </span>
         </div>
@@ -364,26 +486,53 @@ export default function Home() {
       return (
         <div
             key={group.name}
-            className="group relative min-w-[78vw] snap-start overflow-hidden border border-white/10 bg-white/[0.02] transition duration-300 hover:border-orange-700/60 hover:bg-orange-950/10 sm:min-w-[45vw] lg:min-w-0"
+            className="group relative min-w-[78vw] snap-start overflow-hidden border border-white/10 bg-white/[0.02] transition duration-300 hover:border-ps-red hover:bg-ps-red-soft sm:min-w-[45vw] lg:min-w-0"
         >
-          {/* IMAGE PLACEHOLDER */}
-          <div className="relative flex aspect-[4/5] items-center justify-center bg-neutral-900">
+          {/* PERFORMANCE IMAGE */}
+          <div className="relative aspect-[2/3] w-full overflow-hidden bg-neutral-900">
 
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(194,65,12,0.10),transparent_60%)] opacity-0 transition duration-500 group-hover:opacity-100" />
+            <img
+              src={group.image}
+              alt={`${group.name} performance`}
+              loading="lazy"
+              className="
+                h-full
+                w-full
+                object-cover
+                transition
+                duration-500
+                group-hover:scale-[1.02]
+              "
+            />
 
-            <div className="relative px-6 text-center">
-              <span className="block text-6xl font-black text-white/[0.05] md:text-7xl">
-                {number}
-              </span>
+            {/* SUBTLE BOTTOM GRADIENT */}
+            <div
+              className="
+                pointer-events-none
+                absolute
+                inset-0
+                bg-gradient-to-t
+                from-black/40
+                via-transparent
+                to-transparent
+              "
+            />
 
-              <span className="mt-2 block text-[10px] font-bold uppercase tracking-[0.3em] text-white/20">
-                Performance
-              </span>
-            </div>
-
-            <span className="absolute left-4 top-4 text-[10px] font-bold tracking-[0.25em] text-orange-700">
+            {/* PERFORMANCE NUMBER */}
+            <span
+              className="
+                absolute
+                left-4
+                top-4
+                text-[10px]
+                font-bold
+                tracking-[0.25em]
+                text-white/60
+              "
+            >
               {number}
             </span>
+
           </div>
 
           {/* GROUP INFO */}
@@ -398,7 +547,7 @@ export default function Home() {
               </p>
             </div>
 
-            <span className="text-lg text-white/20 transition group-hover:text-orange-600">
+            <span className="text-lg text-white/20 transition group-hover:text-ps-red">
               ↗
             </span>
           </div>
@@ -436,7 +585,7 @@ export default function Home() {
 
                 <Link
                     to="/tickets"
-                    className="btn btn-lg h-16 rounded-none border-0 bg-orange-700 px-10 text-white hover:bg-orange-600"
+                    className="btn btn-lg h-16 rounded-none border-0 bg-ps-red px-10 text-white hover:bg-ps-red-hover"
                 >
                     BUY TICKETS
                     <span className="text-xl">↗</span>

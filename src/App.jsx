@@ -7,6 +7,14 @@ import Home from "./pages/Home";
 import BuyTickets from "./pages/BuyTickets";
 import DJs from "./pages/DJs";
 
+import AdminLayout from "./components/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminOrders from "./pages/admin/AdminOrders";
+
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminCheckIn from "./pages/admin/AdminCheckIn";
+import ProtectedAdminRoute from "./components/admin/ProtectedAdminRoute";
+
 function Layout({ children }) {
   return (
     <div className="min-h-screen bg-[#050505] text-white">
@@ -49,6 +57,35 @@ function App() {
             </Layout>
           }
         />
+
+        <Route
+          path="/admin/login"
+          element={<AdminLogin />}
+        />
+
+        <Route
+          element={<ProtectedAdminRoute />}
+        >
+          <Route
+            path="/admin"
+            element={<AdminLayout />}
+          >
+            <Route
+              index
+              element={<AdminDashboard />}
+            />
+
+            <Route
+              path="orders"
+              element={<AdminOrders />}
+            />
+
+            <Route
+              path="check-in"
+              element={<AdminCheckIn />}
+            />
+          </Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );

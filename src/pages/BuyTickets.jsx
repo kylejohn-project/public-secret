@@ -1,8 +1,37 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
+import TicketSelector from "../components/TicketSelector";
+import PaymentSection from "../components/PaymentSection";
+
 const TICKET_PRICE = 555;
 const MAX_TICKETS = 10;
+
+const API_URL = import.meta.env.VITE_APPS_SCRIPT_URL;
+
+const SUBMISSION_ID_KEY = "ps001_submission_id";
+
+/**
+ * Returns the ID for the current checkout attempt.
+ *
+ * The same ID survives a normal page refresh,
+ * allowing the backend to recognize a retry.
+ */
+function getSubmissionId() {
+  let submissionId =
+    sessionStorage.getItem(SUBMISSION_ID_KEY);
+
+  if (!submissionId) {
+    submissionId = crypto.randomUUID();
+
+    sessionStorage.setItem(
+      SUBMISSION_ID_KEY,
+      submissionId
+    );
+  }
+
+  return submissionId;
+}
 
 export default function BuyTickets() {
   const [quantity, setQuantity] = useState(1);
@@ -15,7 +44,16 @@ export default function BuyTickets() {
   });
 
   const [receipt, setReceipt] = useState(null);
+
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+
+  const freeTickets = useMemo(() => {
+    return Math.floor(quantity / 5);
+  }, [quantity]);
+
+  const totalTickets = quantity + freeTickets;
 
   const totalAmount = useMemo(() => {
     return quantity * TICKET_PRICE;
@@ -23,7 +61,7 @@ export default function BuyTickets() {
 
   function increaseQuantity() {
     setQuantity((current) =>
-      current + 1
+      Math.min(current + 1, MAX_TICKETS)
     );
   }
 
@@ -52,21 +90,131 @@ export default function BuyTickets() {
     setReceipt(file);
   }
 
-  function handleSubmit(event) {
+  async function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const result = reader.result;
+
+        if (typeof result !== "string") {
+          reject(new Error("Unable to read receipt."));
+          return;
+        }
+
+        const base64 = result.split(",")[1];
+
+        resolve(base64);
+      };
+
+      reader.onerror = () => {
+        reject(new Error("Unable to read receipt."));
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    // Temporary frontend-only submission.
-    // This will later call the Vercel / Apps Script API.
+    /*
+    * Extra protection against repeated submission.
+    */
+    if (submitting) {
+      return;
+    }
 
-    console.log({
-      ...form,
-      ticketType: "GENERAL",
-      quantity,
-      totalAmount,
-      receipt,
-    });
+    setError("");
 
-    setSubmitted(true);
+    if (!API_URL) {
+      setError(
+        "The order system is not configured yet. Please try again later."
+      );
+
+      return;
+    }
+
+    if (!receipt) {
+      setError("Please upload your payment receipt.");
+
+      return;
+    }
+
+    try {
+      setSubmitting(true);
+
+      const receiptBase64 = await fileToBase64(receipt);
+
+      const payload = {
+        action: "createOrder",
+
+        /*
+        * Idempotency key.
+        *
+        * Retrying this checkout will send
+        * the same ID.
+        */
+        submissionId: getSubmissionId(),
+
+        firstName: form.firstName.trim(),
+        lastName: form.lastName.trim(),
+        email: form.email.trim(),
+        contactNumber: form.contactNumber.trim(),
+
+        ticketType:
+          quantity >= 5 ? "Bundled" : "Standard",
+
+        quantity,
+
+        receipt: {
+          fileName: receipt.name,
+          mimeType:
+            receipt.type ||
+            "application/octet-stream",
+          base64: receiptBase64,
+        },
+      };
+
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (!result.success) {
+        throw new Error(
+          result.message || "Unable to submit order."
+        );
+      }
+
+      /*
+      * The server has confirmed that this checkout
+      * has an order.
+      *
+      * We can now clear the idempotency key so a
+      * future checkout receives a new one.
+      */
+      sessionStorage.removeItem(
+        SUBMISSION_ID_KEY
+      );
+
+      setSubmitted(true);
+
+    } catch (submitError) {
+      console.error(submitError);
+
+      setError(
+        submitError.message ||
+          "Something went wrong while submitting your order."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (submitted) {
@@ -74,6 +222,7 @@ export default function BuyTickets() {
       <main className="min-h-screen px-6 pb-24 pt-32 md:px-10">
         <div className="mx-auto flex min-h-[70vh] max-w-3xl items-center">
           <div className="w-full border border-white/10 p-8 md:p-16">
+
             <p className="text-xs font-bold uppercase tracking-[0.35em] text-white/40">
               Order Received
             </p>
@@ -91,13 +240,36 @@ export default function BuyTickets() {
             </p>
 
             <div className="mt-10 border-y border-white/10 py-6">
+
               <div className="flex justify-between">
                 <span className="text-white/40">
-                  Tickets
+                  Paid Tickets
                 </span>
 
                 <span className="font-bold">
                   {quantity}
+                </span>
+              </div>
+
+              {freeTickets > 0 && (
+                <div className="mt-4 flex justify-between">
+                  <span className="text-white/40">
+                    Free Tickets
+                  </span>
+
+                  <span className="font-bold text-ps-red">
+                    {freeTickets}
+                  </span>
+                </div>
+              )}
+
+              <div className="mt-4 flex justify-between">
+                <span className="text-white/40">
+                  Total Tickets
+                </span>
+
+                <span className="font-bold">
+                  {totalTickets}
                 </span>
               </div>
 
@@ -110,6 +282,7 @@ export default function BuyTickets() {
                   ₱{totalAmount.toLocaleString()}
                 </span>
               </div>
+
             </div>
 
             <Link
@@ -118,6 +291,7 @@ export default function BuyTickets() {
             >
               BACK TO HOME
             </Link>
+
           </div>
         </div>
       </main>
@@ -130,6 +304,7 @@ export default function BuyTickets() {
 
         {/* HEADER */}
         <div className="mb-16">
+
           <Link
             to="/"
             className="text-xs font-bold uppercase tracking-[0.3em] text-white/40 transition hover:text-white"
@@ -142,6 +317,7 @@ export default function BuyTickets() {
             <br />
             Tickets
           </h1>
+
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -153,6 +329,7 @@ export default function BuyTickets() {
               {/* STEP 01 */}
               <section>
                 <div className="mb-8 flex items-center gap-4">
+
                   <span className="text-xs font-bold text-white/30">
                     01
                   </span>
@@ -160,56 +337,22 @@ export default function BuyTickets() {
                   <h2 className="text-sm font-bold uppercase tracking-[0.25em]">
                     Select Tickets
                   </h2>
+
                 </div>
 
-                <div className="border border-white/10 bg-white/[0.02] p-6 md:p-8">
-                  <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-
-                    <div>
-                      <p className="text-xl font-bold">
-                        General Admission
-                      </p>
-
-                      <p className="mt-2 text-sm text-white/40">
-                        Inclusive of 1 cocktail drink per ticket
-                      </p>
-                    </div>
-
-                    <div className="flex items-center gap-5">
-                      <p className="text-xl font-bold">
-                        ₱{TICKET_PRICE}
-                      </p>
-
-                      <div className="flex items-center border border-white/20">
-                        <button
-                          type="button"
-                          onClick={decreaseQuantity}
-                          className="flex h-11 w-11 items-center justify-center text-lg transition hover:bg-white hover:text-black"
-                        >
-                          −
-                        </button>
-
-                        <span className="flex h-11 w-12 items-center justify-center border-x border-white/20 text-sm font-bold">
-                          {quantity}
-                        </span>
-
-                        <button
-                          type="button"
-                          onClick={increaseQuantity}
-                          className="flex h-11 w-11 items-center justify-center text-lg transition hover:bg-white hover:text-black"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
+                <TicketSelector
+                  quantity={quantity}
+                  onIncrease={increaseQuantity}
+                  onDecrease={decreaseQuantity}
+                />
               </section>
+
 
               {/* STEP 02 */}
               <section className="mt-16">
+
                 <div className="mb-8 flex items-center gap-4">
+
                   <span className="text-xs font-bold text-white/30">
                     02
                   </span>
@@ -217,6 +360,7 @@ export default function BuyTickets() {
                   <h2 className="text-sm font-bold uppercase tracking-[0.25em]">
                     Your Information
                   </h2>
+
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2">
@@ -237,6 +381,7 @@ export default function BuyTickets() {
                     />
                   </div>
 
+
                   <div>
                     <label className="mb-3 block text-xs font-bold uppercase tracking-[0.2em] text-white/40">
                       Last Name *
@@ -253,6 +398,7 @@ export default function BuyTickets() {
                     />
                   </div>
 
+
                   <div>
                     <label className="mb-3 block text-xs font-bold uppercase tracking-[0.2em] text-white/40">
                       Email *
@@ -268,6 +414,7 @@ export default function BuyTickets() {
                       placeholder="you@email.com"
                     />
                   </div>
+
 
                   <div>
                     <label className="mb-3 block text-xs font-bold uppercase tracking-[0.2em] text-white/40">
@@ -286,11 +433,15 @@ export default function BuyTickets() {
                   </div>
 
                 </div>
+
               </section>
+
 
               {/* STEP 03 */}
               <section className="mt-16">
+
                 <div className="mb-8 flex items-center gap-4">
+
                   <span className="text-xs font-bold text-white/30">
                     03
                   </span>
@@ -298,88 +449,23 @@ export default function BuyTickets() {
                   <h2 className="text-sm font-bold uppercase tracking-[0.25em]">
                     Payment
                   </h2>
+
                 </div>
 
-                <div className="border border-white/10 bg-white/[0.02] p-6 md:p-8">
+                <PaymentSection
+                  totalAmount={totalAmount}
+                  receipt={receipt}
+                  onReceiptChange={handleReceiptChange}
+                />
 
-                  <div className="grid gap-10 md:grid-cols-2">
-
-                    {/* QR */}
-                    <div>
-                      <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-white/40">
-                        Scan to Pay
-                      </p>
-
-                    <div className="max-w-[280px] bg-white p-5">
-                        <img
-                            src="/Unknown-3.jpg"
-                            alt="Payment QR Code"
-                            className="aspect-square w-full object-contain"
-                        />
-                    </div>
-
-                      <p className="mt-4 max-w-xs text-xs leading-relaxed text-white/40">
-                        Scan the QR code using your preferred
-                        payment method and complete the payment.
-                      </p>
-                    </div>
-
-                    {/* Payment info */}
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">
-                        Payment Details
-                      </p>
-
-                      <div className="mt-5 space-y-4 text-sm">
-                        <div className="flex justify-between gap-5 border-b border-white/10 pb-4">
-                          <span className="text-white/40">
-                            Account
-                          </span>
-
-                          <span className="text-right font-bold">
-                            PUBLIC SECRET
-                          </span>
-                        </div>
-
-                        <div className="flex justify-between gap-5 border-b border-white/10 pb-4">
-                          <span className="text-white/40">
-                            Amount
-                          </span>
-
-                          <span className="font-bold">
-                            ₱{totalAmount.toLocaleString()}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="mt-8">
-                        <label className="mb-3 block text-xs font-bold uppercase tracking-[0.2em] text-white/40">
-                          Payment Receipt *
-                        </label>
-
-                        <input
-                          type="file"
-                          accept="image/*,.pdf"
-                          required
-                          onChange={handleReceiptChange}
-                          className="file-input file-input-bordered w-full rounded-none border-white/10 bg-white/[0.03] text-sm"
-                        />
-
-                        {receipt && (
-                          <p className="mt-3 text-xs text-white/50">
-                            Selected: {receipt.name}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
               </section>
+
             </div>
+
 
             {/* RIGHT SUMMARY */}
             <aside className="lg:sticky lg:top-28 lg:h-fit">
+
               <div className="border border-white/10 bg-white/[0.03] p-6 md:p-8">
 
                 <p className="text-xs font-bold uppercase tracking-[0.3em] text-white/40">
@@ -398,7 +484,9 @@ export default function BuyTickets() {
                     </span>
                   </div>
 
+
                   <div className="flex justify-between border-b border-white/10 pb-5">
+
                     <span className="text-sm text-white/50">
                       Price
                     </span>
@@ -406,9 +494,40 @@ export default function BuyTickets() {
                     <span className="text-sm font-bold">
                       ₱{TICKET_PRICE.toLocaleString()}
                     </span>
+
                   </div>
 
+
+                  {freeTickets > 0 && (
+                    <div className="flex justify-between">
+
+                      <span className="text-sm text-white/50">
+                        Free Tickets
+                      </span>
+
+                      <span className="text-sm font-bold text-ps-red">
+                        + {freeTickets}
+                      </span>
+
+                    </div>
+                  )}
+
+
+                  <div className="flex justify-between">
+
+                    <span className="text-sm text-white/50">
+                      Total Tickets
+                    </span>
+
+                    <span className="text-sm font-bold">
+                      {totalTickets}
+                    </span>
+
+                  </div>
+
+
                   <div className="flex items-end justify-between pt-2">
+
                     <span className="text-xs uppercase tracking-[0.2em] text-white/40">
                       Total
                     </span>
@@ -416,27 +535,53 @@ export default function BuyTickets() {
                     <span className="text-3xl font-black">
                       ₱{totalAmount.toLocaleString()}
                     </span>
+
                   </div>
 
                 </div>
 
+
+                {error && (
+                  <div className="mt-6 border border-red-500/20 bg-red-500/5 p-4">
+
+                    <p className="text-sm leading-relaxed text-red-400">
+                      {error}
+                    </p>
+
+                  </div>
+                )}
+
+
                 <button
                   type="submit"
-                  className="btn mt-8 h-14 w-full rounded-none border-0 bg-white text-black hover:bg-neutral-200"
+                  disabled={submitting}
+                  className="btn mt-8 h-14 w-full rounded-none border-0 bg-white text-black hover:bg-neutral-200 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  SUBMIT ORDER
-                  <span>↗</span>
+                  {submitting ? (
+                    <>
+                      SUBMITTING...
+                    </>
+                  ) : (
+                    <>
+                      SUBMIT ORDER
+                      <span>↗</span>
+                    </>
+                  )}
                 </button>
+
 
                 <p className="mt-5 text-center text-xs leading-relaxed text-white/30">
                   By submitting this order, you confirm that
                   the information provided is correct.
                 </p>
+
               </div>
+
             </aside>
 
           </div>
         </form>
+
       </div>
     </main>
   );
