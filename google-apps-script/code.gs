@@ -67,6 +67,10 @@ function doGet(e) {
         return getAdminOrders();
 
 
+      case "searchTicketsForCheckIn":
+        requireAdmin(token);
+        return searchTicketsForCheckIn(e.parameter.query);
+
       case "getTicket":
         requireAdmin(token);
 
@@ -165,6 +169,10 @@ function doPost(e) {
         return sendTicketEmail(
           data.orderId
         ); 
+
+      case "checkInTicketsBulk":
+        requireAdmin(data.token);
+        return checkInTicketsBulk(data.ticketIds);
 
       case "checkInTicket":
         requireAdmin(data.token);
