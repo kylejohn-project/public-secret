@@ -217,12 +217,12 @@ export default function AdminDashboard() {
           value={dashboard.totalTickets}
         />
 
-        <StatCard
+        {/* <StatCard
           label="Total Amount"
           value={`₱${Number(
             dashboard.totalAmount
           ).toLocaleString()}`}
-        />
+        /> */}
       </section>
     </main>
   );
