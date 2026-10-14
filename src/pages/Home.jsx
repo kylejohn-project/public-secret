@@ -68,7 +68,7 @@ export default function Home() {
     <main>
 
       {/* TICKET MARQUEE */}
-      {/* <Link
+      <Link
         to="/tickets"
         className="
           group
@@ -82,7 +82,7 @@ export default function Home() {
           py-5
           md:py-3
         "
-      > */}
+      >
         <div className="marquee-track flex w-max items-center whitespace-nowrap">
 
                   {/* FIRST SET */}
@@ -196,7 +196,7 @@ export default function Home() {
                   </div>
 
                 </div>
-              {/* </Link> */}
+              </Link>
 
       {/* HERO */}
       <section className="relative min-h-screen overflow-hidden bg-[#050505]">
@@ -261,12 +261,12 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* <Link
+              <Link
                 to="/tickets"
                 className="btn h-14 rounded-none border-0 bg-ps-red px-8 text-xs font-bold uppercase tracking-[0.2em] text-white hover:bg-ps-red-hover"
               >
                 Buy Tickets ↗
-              </Link> */}
+              </Link>
 
             </div>
           </div>
@@ -701,7 +701,7 @@ export default function Home() {
 
 
       {/* CTA */}
-      {/* <section className="bg-[#050505] px-6 py-24 md:px-10 md:py-32">
+      <section className="bg-[#050505] px-6 py-24 md:px-10 md:py-32">
         <div className="mx-auto max-w-7xl">
           <div className="border border-white/10 p-8 md:p-16">
             <p className="text-xs font-bold uppercase tracking-[0.35em] text-white/40">
@@ -725,7 +725,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
     </main>
   );
 }
