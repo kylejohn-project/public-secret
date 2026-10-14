@@ -50,12 +50,12 @@ export default function Navbar() {
             </NavLink>
           ))}
 
-          <Link
+          {/* <Link
             to="/tickets"
             className="btn btn-sm rounded-none border-0 bg-ps-red px-5 font-bold text-white hover:bg-ps-red-hover"
           >
             BUY TICKETS
-          </Link>
+          </Link> */}
         </nav>
 
         {/* MOBILE MENU BUTTON */}
@@ -117,13 +117,13 @@ export default function Navbar() {
             </NavLink>
           ))}
 
-          <Link
+          {/* <Link
             to="/tickets"
             onClick={closeMenu}
             className="btn mt-6 h-14 rounded-none border-0 bg-ps-red text-white hover:bg-ps-red-hover"
           >
             BUY TICKETS ↗
-          </Link>
+          </Link> */}
         </nav>
       </div>
     </header>
