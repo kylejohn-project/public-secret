@@ -50,12 +50,12 @@ export default function Navbar() {
             </NavLink>
           ))}
 
-          <Link
+          {/* <Link
             to="/tickets"
             className="btn btn-sm rounded-none border-0 bg-ps-red px-5 font-bold text-white hover:bg-ps-red-hover"
           >
             BUY TICKETS
-          </Link>
+          </Link> */}
         </nav>
 
         {/* MOBILE MENU BUTTON */}

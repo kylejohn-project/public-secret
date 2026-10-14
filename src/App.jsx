@@ -40,14 +40,14 @@ function App() {
           }
         />
 
-        <Route
+        {/* <Route
           path="/tickets"
           element={
             <Layout>
               <BuyTickets />
             </Layout>
           }
-        />
+        /> */}
 
         <Route
           path="/djs"

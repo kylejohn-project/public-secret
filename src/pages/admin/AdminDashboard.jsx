@@ -11,8 +11,8 @@ import {
 const API_URL = import.meta.env.VITE_APPS_SCRIPT_URL;
 
 const EMPTY_DASHBOARD = {
-  maxCapacity: 800,
-  ticketsLeft: 800,
+  maxCapacity: 400,
+  ticketsLeft: 400,
   paidTickets: 0,
   freeTickets: 0,
   pendingOrders: 0,
