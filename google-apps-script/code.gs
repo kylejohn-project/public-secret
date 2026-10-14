@@ -19,6 +19,8 @@ const ORDER_HEADERS = [
   "ticketStatus",
   "createdAt",
   "submissionId",
+  "emailSentAt",
+  "emailSendCount",
 ];
 
 function doGet(e) {
@@ -157,6 +159,12 @@ function doPost(e) {
           data.orderId
         );
 
+      case "sendTicketEmail":
+        requireAdmin(data.token);
+
+        return sendTicketEmail(
+          data.orderId
+        ); 
 
       case "checkInTicket":
         requireAdmin(data.token);
@@ -327,10 +335,12 @@ function createOrder(data) {
       receiptFileId,
       "NOT_GENERATED",
       new Date(),
-
-      // Column O
       data.submissionId,
-    ]);
+
+      // Email delivery tracking
+      "",
+      0,
+      ]);
 
 
     /*
@@ -486,7 +496,7 @@ function validateRequest(data) {
       "Invalid submission ID."
     );
   }
-  
+
   if (!data.firstName) {
     throw new Error("First name is required.");
   }
